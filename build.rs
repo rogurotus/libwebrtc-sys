@@ -10,7 +10,7 @@ fn main() {
     
     cxx_build::bridge("src/main.rs")
         .flag("-DWEBRTC_WIN")
-        .file("src/get_device.cc")
+        .file("src/main.cc")
         .compile("libwebrtc-sys");
 }
 

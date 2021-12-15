@@ -86,7 +86,7 @@ class DeviceInfoDS : public DeviceInfoImpl {
                         uint32_t productUniqueIdUTF8Length);
 
   int32_t CreateCapabilityMap(const char* deviceUniqueIdUTF8) override
-      RTC_EXCLUSIVE_LOCKS_REQUIRED(_apiLock);;
+      RTC_EXCLUSIVE_LOCKS_REQUIRED(_apiLock);
 
  private:
   ICreateDevEnum* _dsDevEnum;
