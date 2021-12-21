@@ -51,19 +51,17 @@ mod ffi {
         fn audio_otput_device_names() -> UniquePtr<CxxVector<CxxString>>;
         fn audio_input_device_names() -> UniquePtr<CxxVector<CxxString>>;
 
-        include!("libwebrtc-sys/include/get_video.h");
-        fn create();
+        include!("libwebrtc-sys/include/capture.h");
+        fn test();
     }
 }
 
 fn main() 
 {
-
-    ffi::create();
-
     let devs = Device::enumeration_device();
     for i in devs
     {
         println!("{:?}",i);
     }
+    ffi::test();
 }

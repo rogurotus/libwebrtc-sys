@@ -24,6 +24,9 @@
 #include "rtc_base/type_traits.h"
 #include "rtc_base/zero_memory.h"
 
+#undef max(a,b)
+#undef min(a,b)
+
 namespace rtc {
 
 namespace internal {

@@ -1,5 +1,4 @@
 
-#include "libwebrtc-sys/include/get_video.h"
 #include "libwebrtc-sys/include/get_device.h"
 
 #include <iostream>
@@ -10,11 +9,6 @@
 
 using namespace webrtc;
 using namespace std;
-
-void create()
-{
-    auto video = webrtc::test::VcmCapturer::Create(640, 480, 20, 0);
-}
 
 std::unique_ptr<std::vector<std::string>> video_device_names()
 {
