@@ -111,10 +111,15 @@ pub fn draw_image(render: &mut RustRender, width: i32, height: i32, image: &[u8]
     let mut iter = image.iter();
     for i in 0..width {
         for j in 0..height {
+
+            let r = *iter.next().unwrap();
+            let g = *iter.next().unwrap();
+            let b = *iter.next().unwrap();
+
             render.canvas.set_draw_color(Color::RGB(
-                *iter.next().unwrap(),
-                *iter.next().unwrap(),
-                *iter.next().unwrap(),
+                b,
+                g,
+                r,
             ));
             let point = Point::new(i, j);
             render.canvas.draw_point(point).unwrap();
