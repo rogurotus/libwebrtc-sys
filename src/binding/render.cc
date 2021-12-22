@@ -14,6 +14,7 @@ void Render::OnFrame(const webrtc::VideoFrame& frame)
 	if (frame.rotation() != webrtc::kVideoRotation_0) {
 		buffer = webrtc::I420Buffer::Rotate(*buffer, frame.rotation());
 	}
+	buffer = webrtc::I420Buffer::Rotate(*buffer, webrtc::VideoRotation::kVideoRotation_270);
 	RTC_DCHECK(image_ != NULL);
 	libyuv::I420ToRGB24(buffer->DataY(), buffer->StrideY(), buffer->DataU(),
 		buffer->StrideU(), buffer->DataV(), buffer->StrideV(),

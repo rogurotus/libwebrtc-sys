@@ -109,8 +109,8 @@ impl RustRender {
 pub fn draw_image(render: &mut RustRender, width: i32, height: i32, image: &[u8]) {
     render.canvas.clear();
     let mut iter = image.iter();
-    for i in 0..height {
-        for j in 0..width {
+    for i in 0..width {
+        for j in 0..height {
             render.canvas.set_draw_color(Color::RGB(
                 *iter.next().unwrap(),
                 *iter.next().unwrap(),
