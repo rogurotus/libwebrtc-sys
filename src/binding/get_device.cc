@@ -22,9 +22,6 @@ std::unique_ptr<std::vector<std::string>> video_device_names()
     for (int i = 0; i < n; ++i)
     {
 
-        name[0] = '/0';
-        id[0] = '/0';
-
         video->GetDeviceName(
             i,
             name,
@@ -49,9 +46,6 @@ std::unique_ptr<std::vector<std::string>> audio_input_device_names()
     for (int i = 0; i < n; ++i)
     {
 
-        name[0] = '/0';
-        id[0] = '/0';
-
         audio->RecordingDeviceName(
             i,
             name,
@@ -75,9 +69,6 @@ std::unique_ptr<std::vector<std::string>> audio_otput_device_names()
 
     for (int i = 0; i < n; ++i)
     {
-
-        name[0] = '/0';
-        id[0] = '/0';
 
         audio->PlayoutDeviceName(
             i,

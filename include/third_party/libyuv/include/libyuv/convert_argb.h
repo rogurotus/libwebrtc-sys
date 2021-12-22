@@ -11,9 +11,9 @@
 #ifndef INCLUDE_LIBYUV_CONVERT_ARGB_H_
 #define INCLUDE_LIBYUV_CONVERT_ARGB_H_
 
-#include "libyuv/basic_types.h"
+#include "third_party/libyuv/include/libyuv/basic_types.h"
 
-#include "libyuv/rotate.h"  // For enum RotationMode.
+#include "third_party/libyuv/include/libyuv/rotate.h"  // For enum RotationMode.
 
 #ifdef __cplusplus
 namespace libyuv {

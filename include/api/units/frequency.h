@@ -22,6 +22,10 @@
 #include "api/units/time_delta.h"
 #include "rtc_base/units/unit_base.h"
 
+// WARNING
+
+#undef max(a,b)
+
 namespace webrtc {
 
 class Frequency final : public rtc_units_impl::RelativeUnit<Frequency> {
