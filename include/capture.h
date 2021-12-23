@@ -78,5 +78,3 @@ private:
     rtc::VideoSourceInterface<webrtc::VideoFrame>* source();
     std::unique_ptr<Capture> capturer_;
 };
-
-void test();

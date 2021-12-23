@@ -1,9 +1,9 @@
 
 extern crate sdl2;
-use sdl2::pixels::Color;
+use sdl2::pixels::{Color, PixelFormat, PixelFormatEnum};
 use sdl2::rect::Point;
-use sdl2::render::{Canvas};
-use sdl2::video::Window;
+use sdl2::render::{Canvas, TextureAccess, Texture, TextureCreator};
+use sdl2::video::{Window, WindowContext};
 use std::time::Duration;
 
 
@@ -55,7 +55,7 @@ mod ffi {
     extern "Rust"
     {
         type RustRender;
-        fn draw_image(render: &mut RustRender, width: i32, height: i32, image: &[u8]);
+        fn draw_image(render: &mut RustRender, width: u32, height: u32, image: &[u8]);
     }
 
     unsafe extern "C++" {
@@ -66,8 +66,6 @@ mod ffi {
         fn audio_input_device_names() -> UniquePtr<CxxVector<CxxString>>;
 
         include!("libwebrtc-sys/include/capture.h");
-        fn test();
-
         include!("libwebrtc-sys/include/user_media.h");
         type UserMedia;
         fn create_user_media(video: bool, audio: bool) -> UniquePtr<UserMedia>;
@@ -85,6 +83,7 @@ mod ffi {
 pub struct RustRender {
     canvas: Canvas<Window>,
     sdl: sdl2::Sdl,
+    tc: TextureCreator<WindowContext>,
 }
 
 impl RustRender {
@@ -99,33 +98,37 @@ impl RustRender {
             .unwrap();
 
         let canvas = window.into_canvas().build().unwrap();
+        let texture_creator = canvas.texture_creator();
+        
         RustRender {
             canvas: canvas,
             sdl: sdl_context,
+            tc: texture_creator,
         }
     }
 }
 
-pub fn draw_image(render: &mut RustRender, width: i32, height: i32, image: &[u8]) {
-    render.canvas.clear();
-    let mut iter = image.iter();
-    for i in 0..width {
-        for j in 0..height {
+pub fn draw_image(render: &mut RustRender, width: u32, height: u32, image: &[u8]) {
 
-            let r = *iter.next().unwrap();
-            let g = *iter.next().unwrap();
-            let b = *iter.next().unwrap();
+    
+    let mut event_pump = render.sdl.event_pump().unwrap();
+    let format = PixelFormatEnum::RGB24;
+    let access = TextureAccess::Streaming;
+    let mut texture = render.tc.create_texture(format, access, width , height).unwrap();
 
-            render.canvas.set_draw_color(Color::RGB(
-                b,
-                g,
-                r,
-            ));
-            let point = Point::new(i, j);
-            render.canvas.draw_point(point).unwrap();
+    let rect = sdl2::rect::Rect::new(0  ,0, width, height);
+
+    texture.update(rect, &image, (width*3) as usize).unwrap();
+    render.canvas.copy(&texture, None, None).unwrap();
+
+    for event in event_pump.poll_iter() {
+        match event {
+            _ => {}
         }
     }
+
     render.canvas.present();
+
 }
 
 

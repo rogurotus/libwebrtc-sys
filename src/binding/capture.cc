@@ -102,10 +102,5 @@ rtc::scoped_refptr<CapturerTrackSource> CapturerTrackSource::Create() {
 
 rtc::VideoSourceInterface<webrtc::VideoFrame>* CapturerTrackSource::source() {
         return capturer_.get();
-    }
-    std::unique_ptr<Capture> capturer_;
-
-void test()
-{
-    auto cap = CapturerTrackSource::Create().release();
 }
+std::unique_ptr<Capture> capturer_;

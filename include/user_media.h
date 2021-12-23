@@ -29,7 +29,6 @@ public:
     static UserMedia Create(bool video, bool audio);
     std::unique_ptr<std::vector<webrtc::VideoTrackInterface*>> get_video_tracks();
     std::unique_ptr<std::vector<webrtc::AudioTrackInterface*>> get_audio_tracks();
-    rtc::scoped_refptr<webrtc::PeerConnectionInterface> _pc;
     std::vector<webrtc::AudioTrackInterface*> audio_tracks;
     std::vector<webrtc::VideoTrackInterface*> video_tracks;
     void set_rend(Render& rend);
